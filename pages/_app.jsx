@@ -5,9 +5,7 @@ import "../styles/globals.css"
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
-}) {
-  console.log(session)
-  
+}) {  
   return (
     <SessionProvider session={session}>
       <Header />
