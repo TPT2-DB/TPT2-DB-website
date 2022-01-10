@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import DiscordProvider from "next-auth/providers/discord"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "../../../../lib/mongodb"
+import clientPromise from "../../../lib/mongodb"
 
 export default NextAuth({
     // Configure one or more authentication providers
