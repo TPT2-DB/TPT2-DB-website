@@ -1,9 +1,9 @@
 import { useSession, getSession } from "next-auth/react"
+import ProtectedRoutSignIn from "../../components/ProtectedRoutSignIn"
 
-export default function Page() {
-  const { data: session } = useSession()
+export default function Page({ session }) {
 
-  if (typeof window !== "undefined") return null
+  console.log(session)
 
   if (session) {
     return (
@@ -12,14 +12,15 @@ export default function Page() {
         <p>You can view this page because you are signed in.</p>
       </div>
     )
+  } else {
+    return <ProtectedRoutSignIn />
   }
-  return <p>Access Denied</p>
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(ctx) {
   return {
     props: {
-      session: await getSession(context),
-    },
+      session: await getSession(ctx)
+    }
   }
 }
