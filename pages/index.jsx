@@ -1,16 +1,10 @@
-import { useSession, signIn, signOut } from "next-auth/react"
+import Head from 'next/head'
 
-export default function Component() {
-  const { data: session } = useSession()
-  if(session) {
-    console.log(session)
-    return <>
-      Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
-    </>
-  }
-  return <>
-    Not signed in <br/>
-    <button onClick={() => signIn()}>Sign in</button>
-  </>
+export default function Home() {
+  return (
+    <div>
+      <code className="">Hello Wold</code>
+      <a href="/api/auth/discord/login">login</a>
+    </div>
+  )
 }
