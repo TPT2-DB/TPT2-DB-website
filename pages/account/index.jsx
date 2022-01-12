@@ -1,4 +1,5 @@
-import { useSession, getSession } from "next-auth/react"
+import { useSession, getSession, signOut } from "next-auth/react"
+import BigButton from "../../components/BigButton"
 import ProtectedRoutSignIn from "../../components/ProtectedRoutSignIn"
 
 export default function Page({ session }) {
@@ -7,9 +8,9 @@ export default function Page({ session }) {
 
   if (session) {
     return (
-      <div>
-        <h1>Protected Page</h1>
-        <p>You can view this page because you are signed in.</p>
+      <div className="text-center">
+        <h1>Sign Out</h1>
+        <BigButton onClick={() => signOut()}>Sign Out</BigButton>
       </div>
     )
   } else {

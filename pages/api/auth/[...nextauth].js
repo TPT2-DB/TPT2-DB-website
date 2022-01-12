@@ -1,8 +1,9 @@
 import NextAuth from "next-auth"
 import DiscordProvider from "next-auth/providers/discord"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "../../../lib/mongodb"
 import PlayerModel from "../../../lib/schemas/Player"
+import clientPromise, { connectToDb } from "../../../lib/mongodb"
+const mongoose = require("mongoose")
 
 export default NextAuth({
     // Configure one or more authentication providers
@@ -17,6 +18,10 @@ export default NextAuth({
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
             // console.log(user, account, profile, email, credentials)
+
+            console.log(mongoose.connections)
+
+            await connectToDb()
 
             try {
                 const findUser = await PlayerModel.findOneAndUpdate(
