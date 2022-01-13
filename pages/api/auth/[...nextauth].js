@@ -19,8 +19,6 @@ export default NextAuth({
         async signIn({ user, account, profile, email, credentials }) {
             // console.log(user, account, profile, email, credentials)
 
-            console.log(mongoose.connections)
-
             await connectToDb()
 
             try {
