@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react"
+import { connectToDb } from "../../../lib/mongodb"
 import PlayerModel from "../../../lib/schemas/Player"
 import RollerCoasterModel from "../../../lib/schemas/RollerCoaster"
 
