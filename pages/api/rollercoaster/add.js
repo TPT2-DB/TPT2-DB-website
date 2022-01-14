@@ -5,6 +5,8 @@ import RollerCoasterModel from "../../../lib/schemas/RollerCoaster"
 export default async (req, res) => {
 	const session = await getSession({ req })
 
+	connectToDb()
+
 	if (session) {
 		try {
 			const userDoc = await PlayerModel.findById(session.id)
