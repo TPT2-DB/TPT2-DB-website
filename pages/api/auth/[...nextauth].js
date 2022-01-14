@@ -31,7 +31,7 @@ export default NextAuth({
                             bot: profile.bot,
                             accent_color: profile.accent_color,
                             avatar: {
-                                url: profile.avatar ? `https://cdn.discordapp.com/avatars${profile.id}/${profile.avatar}.png` : "https://cdn.discordapp.com/embed/avatars/0.png",
+                                url: profile.avatar ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png` : "https://cdn.discordapp.com/embed/avatars/0.png",
                                 hash: profile.avatar || "no_avatar"
                             }
                         }
@@ -49,7 +49,7 @@ export default NextAuth({
                             bot: profile.bot,
                             accent_color: profile.accent_color,
                             avatar: {
-                                url: profile.avatar ? `https://cdn.discordapp.com/avatars${profile.id}/${profile.avatar}.png` : "https://cdn.discordapp.com/embed/avatars/0.png",
+                                url: profile.avatar ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png` : "https://cdn.discordapp.com/embed/avatars/0.png",
                                 hash: profile.avatar || "no_avatar"
                             }
                         },
