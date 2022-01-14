@@ -12,17 +12,35 @@ export default async (req, res) => {
 		try {
 			const userDoc = await PlayerModel.findById(session.id)
 
-  			const {name, description, content} = req.query
+			let name
+			let description
+			let content
 
-			if (!name || !description || !content) {
-				res.status(400).json({error: "missing parameters"}).end()
-				return
+			if (req.method === "POST") {
+				let jsonBody = JSON.parse(JSON.stringify(req.body))
+
+				name = jsonBody.name
+				description = jsonBody.description
+				content = jsonBody.content
+
+				if (!name || !description || !content) {
+					res.status(400).json({error: "missing parameters"})
+					return
+				}
+
+			} else {
+				({name, description, content} = req.query)
+
+				if (!name || !description || !content) {
+					res.status(400).json({error: "missing parameters"})
+					return
+				}
 			}
 
 			const rollerCoasterDoc = new RollerCoasterModel({
 				name,
 				description,
-				content: content,
+				content,
 				created: Date.now(),
 				creator: session.id
 			})
@@ -31,8 +49,12 @@ export default async (req, res) => {
 			userDoc.rollerCoasters.push(rollerCoasterDoc._id)
 			userDoc.save()
 
-			res.status(201).json(rollerCoasterDoc)
-			
+			console.log(req.query.redirectToPost)
+			if (req.query.redirectToPost === "true") {
+				console.log("yes")
+				res.redirect(`/c/${rollerCoasterDoc._id}/${name}`)
+			}
+
 		} catch (err) {
 			console.error(err)
 			res.status(500)
