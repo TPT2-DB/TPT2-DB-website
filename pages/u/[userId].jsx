@@ -8,7 +8,7 @@ import ContentContainer from "../../components/ContentContainer";
 
 export default function user({user}) {
 
-	if (!user.length) {
+	if (Object.keys(user).length === 0) {
 		return (
 			<h1>Not Found</h1>
 		)
