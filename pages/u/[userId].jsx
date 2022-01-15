@@ -6,7 +6,13 @@ import Link from "next/link";
 import ContentContainer from "../../components/ContentContainer";
 
 
-export default function user({user, errorCode}) {
+export default function user({user}) {
+
+	if (Object.keys(user).length === 0) {
+		return (
+			<h1>Not Found</h1>
+		)
+	}
 
 	return (
 		<div>
@@ -50,7 +56,6 @@ export async function getServerSideProps(context) {
 
 	const response = await fetch(`${process.env.URL}/api/user/${context.query.userId}`);
   	const data = await response.json()
-	
 
 	return {
 		props: {
