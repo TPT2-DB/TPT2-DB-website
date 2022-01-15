@@ -4,8 +4,6 @@ import ProtectedRoutSignIn from "../../components/ProtectedRoutSignIn"
 
 export default function Page({ session }) {
 
-  console.log(session)
-
   if (session) {
     return (
       <div className="text-center">

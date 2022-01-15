@@ -17,7 +17,6 @@ export default NextAuth({
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-            // console.log(user, account, profile, email, credentials)
 
             await connectToDb()
 
@@ -41,6 +40,7 @@ export default NextAuth({
     
                 if (!findUser) {
                     const newUser = await PlayerModel.create({
+                        _id: user.id,
                         discordId: profile.id,
                         discordUser: {
                             id: profile.id,
@@ -68,7 +68,8 @@ export default NextAuth({
             return baseUrl
         },
         async session({ session, user, token }) {
-            return session
+            session.id = user.id
+            return Promise.resolve(session)
         },
         async jwt({ token, user, account, profile, isNewUser }) {
             return token
