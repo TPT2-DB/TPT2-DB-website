@@ -45,7 +45,7 @@ export default function user({user}) {
 
 export async function getServerSideProps(context) {
 
-	const response = await fetch(`${process.env.URL}/api/user/${context.query.userId}`);
+	const response = await fetch(`${process.env.URL}/api/user/byNum?id=${context.query.userId}`);
   	const data = await response.json()
 
 	return {
