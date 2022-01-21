@@ -4,7 +4,6 @@ import PlayerModel from "../../../lib/schemas/Player"
 import RollerCoasterModel from "../../../lib/schemas/RollerCoaster"
 
 export default async (req, res) => {
-	const session = await getSession({ req })
 
 	connectToDb()
 
@@ -12,17 +11,31 @@ export default async (req, res) => {
 		const {id} = req.query
 
 		if (!id) {
-			res.status(400).json({error: "missing parameters"}).end()
+			res.status(400).json({error: "missing parameters"})
 			return
 		}
 
-		const rollerCoasterDoc = await RollerCoasterModel.findById(id)
+		let rollerCoasterDocByNum = null
 
-		res.status(200).json(JSON.parse(JSON.stringify(rollerCoasterDoc)) || {})
+		try {
+			rollerCoasterDocByNum = await RollerCoasterModel.findOne({ numId: id })
+		} catch {
+
+		}
+
+		if (rollerCoasterDocByNum) {
+			res.status(200).json(JSON.parse(JSON.stringify(rollerCoasterDocByNum)))
+			return
+		}
+
+		const rollerCoasterDocById = await RollerCoasterModel.findById(id)
+		res.status(500).json(JSON.parse(JSON.stringify(rollerCoasterDocById)) || {})
+		return
+		
 		
 	} catch (err) {
 		console.error(err)
 		res.status(500).json({})
+		return
 	}
-	res.end()
 }
